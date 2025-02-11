@@ -1,0 +1,46 @@
+<header class="sticky-top bg-white">
+    <div  class="d-flex justify-content-between m-0">
+    <div class="menu-icons">
+        <i class="bi bi-list" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"></i>
+        <i class="bi bi-search"></i>
+    </div>
+
+    <!--Logo-->
+    <a href="index.html" class="mb-5 position-absolute start-50 translate-middle-x text-decoration-none">
+        <span class="logo-letter">A</span>
+        <span class="logo-letter">B</span>
+        <span class="logo-letter">C</span>
+    </a>
+
+    <div class="d-flex">
+        <button class="btn btn-dark me-2 fw-bold">Register</button>
+        <button class="btn btn-light me-2 fw-bold border">Sign In</button>
+    </div>
+    </div>
+<hr class="m-2"/>
+<!-- Navbar-->
+<nav class="navbar justify-content-center">
+    <a class="nav-link active ms-3 fw-bold" href="index.html">Home</a>
+    <a class="nav-link active ms-3 fw-bold" href="productPage.html">Products</a>
+    <a class="nav-link active ms-3 fw-bold" href="about.html">About Us</a>
+</nav>
+<hr class="m-1"/>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Menu</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Search Box -->
+        <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Placeholder">
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="list-group">
+            <li class="list-group-item"><a href="index.html">Home</a></li>
+            <li class="list-group-item"><a href="productPage.html">Products</a></li>
+            <li class="list-group-item"><a href="about.html">About us</a></li>
+        </ul>
+    </div>
+</div>

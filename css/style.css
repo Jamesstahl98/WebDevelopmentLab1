@@ -1,0 +1,30 @@
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+.menu-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.menu-icons i {
+    font-size: 20px;
+    font-size: xx-large;
+    cursor: pointer;
+}
+.logo-letter {
+    font-size: 28px;
+    background-color: #CA7535;
+    color: #358ACA;
+    font-weight: bold;
+    padding: 0px 12px;
+    margin: 3px;
+    display: inline-block;
+}
+.container-fluid {
+    padding-left: 12vw;
+    padding-right: 12vw;
+}
+* {
+  border-radius: 0 !important;
+}
