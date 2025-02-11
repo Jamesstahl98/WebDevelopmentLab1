@@ -9,12 +9,13 @@
     <title>Home Page</title>
 </head>
 <body>
+    <script type="module" src="../js/products.js"></script>
     <div id="header-container"></div>
     <div class="container mt-4">
         <section class="mb-5">
-            <h5 class="fw-bold text-uppercase mb-3">Best Sellers</h5>
+            <h5 class="fw-bold text-uppercase mb-3">On Sale</h5>
     
-            <div class="row row-cols-1 row-cols-md-4 g-3">
+            <div class="row row-cols-1 row-cols-md-4 g-3" id="onSale">
                 <!-- Product Item -->
                 <div class="col">
                     <div class="d-flex align-items-center">
@@ -119,7 +120,7 @@
         <section class="mb-5">
             <h5 class="fw-bold text-uppercase mb-3">New in stock</h5>
     
-            <div class="row row-cols-1 row-cols-md-4 g-3">
+            <div class="row row-cols-1 row-cols-md-4 g-3" id="newInStock">
                 <!-- Product Item -->
                 <div class="col">
                     <div class="d-flex align-items-center">

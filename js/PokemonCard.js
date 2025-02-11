@@ -1,9 +1,9 @@
 export class PokemonCard{
-    constructor(id, name, originalPriceInDollar, percentOff, numberInStock, dateAdded)
+    constructor(id, name, originalPriceInDollars, percentOff, numberInStock, dateAdded)
     {
         this.id = id;
         this.name = name;
-        this.originalPrice = originalPrice;
+        this.originalPriceInDollars = originalPriceInDollars;
         this.percentOff = percentOff;
         this.numberInStock = numberInStock;
         this.dateAdded = dateAdded;
