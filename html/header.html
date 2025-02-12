@@ -13,13 +13,16 @@
             </a>
         </h1>
 
-        <div class="row justify-content-center m-3">
+        <div class="row m-3">
             <div class="col-md-12">
                 <div class="input-group">
                     <span class="input-group-text">
                         <i class="bi bi-search" type="button"></i>
                     </span>
                     <input type="text" class="form-control search-input" placeholder="Search...">
+                    <div class="menu-icons ms-4">
+                        <i class="bi bi-cart ms-4 menu-icons" type="button" data-bs-toggle="offcanvas" data-bs-target="#shoppingCart"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,6 +34,7 @@
     <a class="nav-link active ms-3 fw-bold" href="productPage.html">Products</a>
     <a class="nav-link active ms-3 fw-bold" href="about.html">About Us</a>
 </nav>
+
 <hr class="m-1"/>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
     <div class="offcanvas-header">
@@ -43,6 +47,18 @@
             <li class="list-group-item"><a href="index.html">Home</a></li>
             <li class="list-group-item"><a href="productPage.html">Products</a></li>
             <li class="list-group-item"><a href="about.html">About us</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="shoppingCart" aria-labelledby="shoppingCartLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Shopping Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="list-group">
+            
         </ul>
     </div>
 </div>
