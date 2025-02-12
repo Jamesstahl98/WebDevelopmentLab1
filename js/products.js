@@ -64,7 +64,7 @@ async function populateProductDisplay(collection, elementId, amountToDisplay)
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center card p-2 ps-0">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border">
                 <div class="position-relative">
                     <!-- Sale Badge -->
                     ${product.percentOff > 0 ? `
@@ -105,7 +105,7 @@ function loadProductsWithPagination(page, collection) {
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center card p-2">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border">
                 <div class="position-relative">
                     <!-- Sale Badge -->
                     ${product.percentOff > 0 ? `
