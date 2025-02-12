@@ -2,8 +2,10 @@
     font-weight: bold;
     font-size: 24px;
 }
-.bg-purchase {
+.purchase-button {
     background-color: green;
+    width: 100%;
+    min-height: 40px;
 }
 .menu-icons {
     display: flex;
