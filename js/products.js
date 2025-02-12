@@ -25,12 +25,19 @@ export const pokemonCardCollection = [
     new PokemonCard("hgss4-19", "Dugtrio", 15, 0, 4, new Date("2025-02-01"))
 ];
 
+let cart = [];
+
 let currentPage = 1;
 const productsPerPage = 16;
 const totalPages = Math.ceil(pokemonCardCollection.length / productsPerPage);
 
 document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
+});
+
+document.getElementById("addToCartButton").addEventListener("click", () => {
+    const productId = document.getElementById("productId").getAttribute("content");
+    addProductToCart(productId);
 });
 
 function populateProducts() 
@@ -173,6 +180,7 @@ async function openProductModal(product) {
     document.getElementById("modalProductRarity").textContent = "";
     document.getElementById("modalProductSet").textContent = "";
 
+    document.getElementById("productId").setAttribute("content", product.id);
     document.getElementById("productModalLabel").textContent = product.name;
     document.getElementById("modalProductImage").src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
     document.getElementById("modalProductPrice").textContent = product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100));
@@ -182,6 +190,53 @@ async function openProductModal(product) {
     let cardData = await getCardAsync(product.id);
     document.getElementById("modalProductSet").textContent = cardData.set.name || "Unknown Set";
     document.getElementById("modalProductRarity").textContent = cardData.rarity || "Unknown Rarity";
+}
+
+function addProductToCart(id) {
+
+    const product = pokemonCardCollection.find(p => p.id === id);
+    if (product) 
+    {
+        cart.push(product);
+        console.log("Added to cart:", product);
+    } 
+    else 
+    {
+        console.log("Product not found!");
+    }
+
+    const idElement = document.createElement("meta");
+    idElement.classList.add("productId");
+    idElement.setAttribute("content", product.id);
+    
+    const listItem = document.createElement("li");
+    const nameLabel = document.createElement("p");
+    nameLabel.innerHTML = product.name;
+
+    const priceLabel = document.createElement("p");
+    priceLabel.innerHTML = `$${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))}`;
+
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = "Remove from cart";
+    removeButton.type = "button";
+    removeButton.ariaLabel = "removeButton"; 
+
+    listItem.appendChild(idElement);
+    listItem.appendChild(nameLabel);
+    listItem.appendChild(priceLabel);
+    listItem.appendChild(removeButton);
+
+    const separator = document.createElement("hr");
+
+    let cartList = document.getElementById("shoppingCartList");
+
+    cartList.appendChild(listItem);
+    cartList.appendChild(separator);
+}
+
+function removeProductFromCart()
+{
+
 }
 
 async function getCardAsync(cardId)
@@ -208,7 +263,7 @@ function sortBySale(arrayTosort)
 
 function sortByDateAdded(arrayTosort)
 {
-    let sortedProducts = [...pokemonCardCollection]
+    let sortedProducts = [...arrayTosort]
     .sort((a, b) => b.dateAdded - a.dateAdded);
     return sortedProducts;
 }
