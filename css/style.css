@@ -21,10 +21,11 @@
     margin: 3px;
     display: inline-block;
 }
-.container-fluid {
-    padding-left: 12vw;
-    padding-right: 12vw;
-}
 * {
   border-radius: 0 !important;
+}
+
+body
+{
+    background-color: #fafafa;
 }
