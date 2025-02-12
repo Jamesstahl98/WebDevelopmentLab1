@@ -1,4 +1,5 @@
 import { PokemonCard } from "./PokemonCard.js";
+
 export const pokemonCardCollection = [
     new PokemonCard("ex12-5", "Gengar", 1, 0, 5, new Date("2025-01-25")), 
     new PokemonCard("mcd19-6", "Pikachu", 2, 30, 4, new Date("2025-01-28")),
@@ -45,10 +46,24 @@ async function populateNewInStock() {
 
         let productElement = document.createElement("div");
         productElement.classList.add("col");
+        productElement.setAttribute("data-bs-toggle", "modal");
+        productElement.setAttribute("data-bs-target", "#productModal");
+        productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
             <div class="d-flex align-items-center">
-                <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                <div class="position-relative">
+                    <!-- Sale Badge -->
+                    ${product.percentOff > 0 ? `
+                        <span class="badge bg-danger position-absolute top-0 start-0 translate-middle rounded-circle"
+                              style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                            -${product.percentOff}%
+                        </span>` : ""}
+                    
+                    <!-- Product Image -->
+                    <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" 
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
                     <p class="text-muted mb-1">${setName}</p>
@@ -56,6 +71,8 @@ async function populateNewInStock() {
                 </div>
             </div>
         `;
+
+        productElement.addEventListener("click", () => openProductModal(product, setName));
 
         newInStock.appendChild(productElement);
     }
@@ -77,17 +94,33 @@ async function populateOnSale() {
 
         let productElement = document.createElement("div");
         productElement.classList.add("col");
+        productElement.setAttribute("data-bs-toggle", "modal");
+        productElement.setAttribute("data-bs-target", "#productModal");
+        productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
             <div class="d-flex align-items-center">
-                <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                <div class="position-relative">
+                    <!-- Sale Badge -->
+                    ${product.percentOff > 0 ? `
+                        <span class="badge bg-danger position-absolute top-0 start-0 translate-middle rounded-circle"
+                              style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                            -${product.percentOff}%
+                        </span>` : ""}
+                    
+                    <!-- Product Image -->
+                    <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" 
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
                     <p class="text-muted mb-1">${setName}</p>
-                    <p>${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))} $</p>
+                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))}</p>
                 </div>
             </div>
         `;
+
+        productElement.addEventListener("click", () => openProductModal(product, setName));
 
         onSale.appendChild(productElement);
     }
@@ -105,4 +138,13 @@ async function getSetName(setId) {
         console.error("Error fetching set name:", error);
         return "Unknown Set";
     }
+}
+
+function openProductModal(product, setName) {
+    document.getElementById("productModalLabel").textContent = product.name;
+    document.getElementById("modalProductImage").src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+    document.getElementById("modalProductSet").textContent = setName;
+    document.getElementById("modalProductPrice").textContent = product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100));
+    document.getElementById("modalProductDiscount").textContent = product.percentOff;
+    document.getElementById("modalProductStock").textContent = product.numberInStock;
 }

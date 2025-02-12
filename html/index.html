@@ -11,106 +11,27 @@
 <body>
     <script type="module" src="../js/products.js"></script>
     <div id="header-container"></div>
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalProductImage" src="" class="img-fluid mb-3" alt="Product Image">
+                    <p><strong>Set:</strong> <span id="modalProductSet"></span></p>
+                    <p><strong>Price:</strong> $<span id="modalProductPrice"></span></p>
+                    <p><strong>Discount:</strong> <span id="modalProductDiscount"></span>% off</p>
+                    <p><strong>Stock:</strong> <span id="modalProductStock"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container mt-4">
         <section class="mb-5">
             <h5 class="fw-bold text-uppercase mb-3">On Sale</h5>
-    
-            <div class="row row-cols-1 row-cols-md-4 g-3" id="onSale">
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="row row-cols-1 row-cols-md-4 g-3" id="onSale">  
             </div>
         </section>
     </div>
@@ -119,104 +40,7 @@
     <div class="container mt-4">
         <section class="mb-5">
             <h5 class="fw-bold text-uppercase mb-3">New in stock</h5>
-    
-            <div class="row row-cols-1 row-cols-md-4 g-3" id="newInStock">
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Item -->
-                <div class="col">
-                    <div class="d-flex align-items-center">
-                        <img src="image1.jpg" class="img-fluid rounded me-3" alt="Product" style="width: 100px; height: auto;">
-                        <div>
-                            <p class="fw-bold mb-1">Card Name</p>
-                            <p class="text-muted mb-1">Set</p>
-                            <p>Price</p>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="row row-cols-1 row-cols-md-4 g-3" id="newInStock">    
             </div>
         </section>
     </div>
