@@ -140,11 +140,30 @@ async function getSetName(setId) {
     }
 }
 
-function openProductModal(product, setName) {
+async function openProductModal(product, setName) {
+    document.getElementById("modalProductRarity").textContent = "";
     document.getElementById("productModalLabel").textContent = product.name;
     document.getElementById("modalProductImage").src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
     document.getElementById("modalProductSet").textContent = setName;
     document.getElementById("modalProductPrice").textContent = product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100));
     document.getElementById("modalProductDiscount").textContent = product.percentOff;
     document.getElementById("modalProductStock").textContent = product.numberInStock;
+    
+    let cardData = await getCardAsync(product.id);
+    document.getElementById("modalProductRarity").textContent = cardData.rarity || "Unknown Rarity";
+}
+
+async function getCardAsync(cardId)
+{
+    try 
+    {
+        let response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`);
+        let data = await response.json();
+        return data.data;
+    } 
+    catch (error) 
+    {
+        console.error("Error fetching card:", error);
+        return "Unknown Card";
+    }
 }
