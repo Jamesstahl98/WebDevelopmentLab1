@@ -11,10 +11,11 @@
 <body>
     <script type="module" src="../js/products.js"></script>
     <div id="header-container"></div>
-    <div class="modal fade" id="productModal" tabindex="-1" aria-labelled="productModalLabel" aria-hidden="true">
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -24,6 +25,7 @@
                     <p><strong>Price:</strong> $<span id="modalProductPrice"></span></p>
                     <p><strong>Discount:</strong> <span id="modalProductDiscount"></span>% off</p>
                     <p><strong>Stock:</strong> <span id="modalProductStock"></span></p>
+                    <button class="bg-purchase" id="addToCartButton"><strong>Add to cart</strong></button>
                 </div>
             </div>
         </div>

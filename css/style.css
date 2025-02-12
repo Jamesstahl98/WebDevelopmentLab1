@@ -2,6 +2,9 @@
     font-weight: bold;
     font-size: 24px;
 }
+.bg-purchase {
+    background-color: green;
+}
 .menu-icons {
     display: flex;
     align-items: center;
