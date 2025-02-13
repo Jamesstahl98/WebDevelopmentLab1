@@ -31,6 +31,8 @@ let currentPage = 1;
 const productsPerPage = 16;
 const totalPages = Math.ceil(pokemonCardCollection.length / productsPerPage);
 
+window.onload = loadCart;
+
 document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
 });
@@ -192,51 +194,52 @@ async function openProductModal(product) {
     document.getElementById("modalProductRarity").textContent = cardData.rarity || "Unknown Rarity";
 }
 
-function addProductToCart(id) {
+function addCartItemToHTML(product) {
+    const cartList = document.getElementById("shoppingCartList");
 
-    const product = pokemonCardCollection.find(p => p.id === id);
-    if (product) 
-    {
-        cart.push(product);
-        console.log("Added to cart:", product);
-    } 
-    else 
-    {
-        console.log("Product not found!");
-    }
-
-    const idElement = document.createElement("meta");
-    idElement.classList.add("productId");
-    idElement.setAttribute("content", product.id);
-    
     const listItem = document.createElement("li");
+    listItem.setAttribute("data-id", product.id);
+
     const nameLabel = document.createElement("p");
     nameLabel.innerHTML = product.name;
 
     const priceLabel = document.createElement("p");
-    priceLabel.innerHTML = `$${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))}`;
+    priceLabel.innerHTML = `$${product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))}`;
 
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove from cart";
     removeButton.type = "button";
-    removeButton.ariaLabel = "removeButton"; 
-
-    listItem.appendChild(idElement);
-    listItem.appendChild(nameLabel);
-    listItem.appendChild(priceLabel);
-    listItem.appendChild(removeButton);
+    removeButton.ariaLabel = "removeButton";
+    removeButton.addEventListener("click", () => removeProductFromCart(product.id, listItem));
 
     const separator = document.createElement("hr");
 
-    let cartList = document.getElementById("shoppingCartList");
+    listItem.appendChild(nameLabel);
+    listItem.appendChild(priceLabel);
+    listItem.appendChild(removeButton);
 
     cartList.appendChild(listItem);
     cartList.appendChild(separator);
 }
 
-function removeProductFromCart()
-{
+function addProductToCart(id) {
+    const product = pokemonCardCollection.find(p => p.id === id);
+    if (product) {
+        cart.push(product);
+        saveCart();
+        addCartItemToHTML(product);
+        console.log("Added to cart:", product);
+    } else {
+        console.log("Product not found.");
+    }
+}
 
+function removeProductFromCart(productId, listItem) {
+    cart = cart.filter(p => p.id !== productId);
+    saveCart();
+    listItem.nextElementSibling?.remove();
+    listItem.remove();
+    console.log(`Removed product with ID ${productId}`);
 }
 
 async function getCardAsync(cardId)
@@ -266,4 +269,20 @@ function sortByDateAdded(arrayTosort)
     let sortedProducts = [...arrayTosort]
     .sort((a, b) => b.dateAdded - a.dateAdded);
     return sortedProducts;
+}
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function loadCart() {
+    const storedCart = localStorage.getItem("cart");
+    cart = storedCart ? JSON.parse(storedCart) : [];
+
+    const cartList = document.getElementById("shoppingCartList");
+    cartList.innerHTML = ""; 
+
+    cart.forEach(product => {
+        addCartItemToHTML(product);
+    });
 }
