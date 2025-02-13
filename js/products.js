@@ -199,24 +199,39 @@ function addCartItemToHTML(product) {
 
     const listItem = document.createElement("li");
     listItem.setAttribute("data-id", product.id);
+    listItem.classList.add("cart-item");
+
+    const productImage = document.createElement("img");
+    productImage.src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+    productImage.alt = product.name;
+    productImage.classList.add("cart-item-image");
+
+    const textContainer = document.createElement("div");
+    textContainer.classList.add("cart-item-text");
 
     const nameLabel = document.createElement("p");
     nameLabel.innerHTML = product.name;
+    nameLabel.classList.add("cart-item-name");
 
     const priceLabel = document.createElement("p");
-    priceLabel.innerHTML = `$${product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))}`;
+    priceLabel.innerHTML = `$${(product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))).toFixed(2)}`;
+    priceLabel.classList.add("cart-item-price");
 
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove from cart";
     removeButton.type = "button";
     removeButton.ariaLabel = "removeButton";
+    removeButton.classList.add("remove-button");
     removeButton.addEventListener("click", () => removeProductFromCart(product.id, listItem));
 
     const separator = document.createElement("hr");
 
-    listItem.appendChild(nameLabel);
-    listItem.appendChild(priceLabel);
-    listItem.appendChild(removeButton);
+    textContainer.appendChild(nameLabel);
+    textContainer.appendChild(priceLabel);
+    textContainer.appendChild(removeButton);
+
+    listItem.appendChild(productImage);
+    listItem.appendChild(textContainer);
 
     cartList.appendChild(listItem);
     cartList.appendChild(separator);
