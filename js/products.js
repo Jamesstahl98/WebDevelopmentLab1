@@ -31,10 +31,9 @@ let currentPage = 1;
 const productsPerPage = 16;
 const totalPages = Math.ceil(pokemonCardCollection.length / productsPerPage);
 
-window.onload = loadCart;
-
 document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
+    loadCart();
 });
 
 const addToCartButton = document.getElementById("addToCartButton");
@@ -60,16 +59,25 @@ function populateProducts()
     }
 }
 
-async function populateProductDisplay(collection, elementId, amountToDisplay)
-{
+async function populateProductDisplay(collection, elementId, amountToDisplay) {
     let productContainer = document.getElementById(elementId);
-
     productContainer.innerHTML = "";
+
+    collection.slice(0, amountToDisplay).forEach(product => {
+        let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+
+        if (!document.querySelector(`link[rel="preload"][href="${imageUrl}"]`)) {
+            let link = document.createElement("link");
+            link.rel = "preload";
+            link.href = imageUrl;
+            link.as = "image";
+            document.head.appendChild(link);
+        }
+    });
 
     for (let i = 0; i < amountToDisplay && i < collection.length; i++) {
         let product = collection[i]; 
-
-        let setId = product.id.split('-')[0];
+        let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
 
         let productElement = document.createElement("div");
         productElement.classList.add("col");
@@ -88,20 +96,21 @@ async function populateProductDisplay(collection, elementId, amountToDisplay)
                         </span>` : ""}
                     
                     <!-- Product Image -->
-                    <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" 
-                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                    <img src="${imageUrl}" fetchpriority="high" loading="eager"
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
                 </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
-                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))}</p>
+                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))}</p>
                 </div>
             </div>
         `;
-        productElement.addEventListener("click", () => openProductModal(product));
 
+        productElement.addEventListener("click", () => openProductModal(product));
         productContainer.appendChild(productElement);
     }
 }
+
 function loadProductsWithPagination(page, collection) {
     const productsContainer = document.getElementById("products");
     productsContainer.innerHTML = "";
@@ -111,9 +120,22 @@ function loadProductsWithPagination(page, collection) {
     const productsToDisplay = collection.slice(startIndex, endIndex);
 
     productsToDisplay.forEach(product => {
+        let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+
+        if (!document.querySelector(`link[rel="preload"][href="${imageUrl}"]`)) {
+            let link = document.createElement("link");
+            link.rel = "preload";
+            link.href = imageUrl;
+            link.as = "image";
+            document.head.appendChild(link);
+        }
+    });
+
+    productsToDisplay.forEach((product, index) => {
+        let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+
         let productElement = document.createElement("div");
         productElement.classList.add("col");
-
         productElement.setAttribute("data-bs-toggle", "modal");
         productElement.setAttribute("data-bs-target", "#productModal");
         productElement.style.cursor = "pointer";
@@ -129,12 +151,12 @@ function loadProductsWithPagination(page, collection) {
                         </span>` : ""}
                     
                     <!-- Product Image -->
-                    <img src="https://images.pokemontcg.io/${product.id.replace("-", "/")}.png" 
-                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                    <img src="${imageUrl}" fetchpriority="high" loading="eager"
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
                 </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
-                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100))}</p>
+                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))}</p>
                 </div>
             </div>
         `;
