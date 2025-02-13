@@ -37,10 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
 });
 
-document.getElementById("addToCartButton").addEventListener("click", () => {
-    const productId = document.getElementById("productId").getAttribute("content");
-    addProductToCart(productId);
-});
+const addToCartButton = document.getElementById("addToCartButton");
+
+if(addToCartButton != null)
+{
+    addToCartButton.addEventListener("click", () => {
+        const productId = document.getElementById("productId").getAttribute("content");
+        addProductToCart(productId);
+    });
+}
 
 function populateProducts() 
 {
@@ -184,7 +189,11 @@ async function openProductModal(product) {
 
     document.getElementById("productId").setAttribute("content", product.id);
     document.getElementById("productModalLabel").textContent = product.name;
-    document.getElementById("modalProductImage").src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+
+    let productImage = document.getElementById("modalProductImage");
+    productImage.src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
+    productImage.alt = product.name;
+
     document.getElementById("modalProductPrice").textContent = product.originalPriceInDollars - (product.originalPriceInDollars*(product.percentOff/100));
     document.getElementById("modalProductDiscount").textContent = product.percentOff;
     document.getElementById("modalProductStock").textContent = product.numberInStock;
