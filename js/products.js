@@ -31,10 +31,9 @@ let currentPage = 1;
 const productsPerPage = 16;
 const totalPages = Math.ceil(pokemonCardCollection.length / productsPerPage);
 
-window.onload = loadCart;
-
 document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
+    loadCart();
 });
 
 const addToCartButton = document.getElementById("addToCartButton");
@@ -98,7 +97,7 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
                     
                     <!-- Product Image -->
                     <img src="${imageUrl}" fetchpriority="high" loading="eager"
-                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 100px; height: auto;">
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
                 </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
@@ -152,11 +151,8 @@ function loadProductsWithPagination(page, collection) {
                         </span>` : ""}
                     
                     <!-- Product Image -->
-                    <img src="${imageUrl}" 
-                         class="img-fluid rounded me-3" 
-                         alt="${product.name}" 
-                         style="width: 100px; height: auto;"
-                         ${index === 0 ? 'fetchpriority="high" loading="eager"' : 'loading="lazy"'}>
+                    <img src="${imageUrl}" fetchpriority="high" loading="eager"
+                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
                 </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
