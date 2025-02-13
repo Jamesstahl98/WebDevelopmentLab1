@@ -1,3 +1,4 @@
+/*Header*/
 .logo {
     font-weight: bold;
     font-size: 24px;
@@ -9,12 +10,6 @@
     position:absolute;
     bottom: 0;
     left: 10%;
-}
-.modal-body {
-    padding-bottom: 60px; 
-}
-.cardGraphic-cart{
-    width: 30%;
 }
 .menu-icons {
     display: flex;
@@ -39,6 +34,12 @@
   border-radius: 0 !important;
 }
 
+.cardGraphic-cart{
+    width: 30%;
+}
+.products {
+    min-height: 400px;
+}
 body
 {
     background-color: #fafafa;
@@ -96,4 +97,13 @@ body
 
 .remove-button:hover {
     background-color: darkred;
+}
+
+/*Modal*/
+#modalProductImage {
+    width: 60%;
+    height: auto;
+}
+.modal-body {
+    padding-bottom: 60px; 
 }
