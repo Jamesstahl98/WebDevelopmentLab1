@@ -1,4 +1,5 @@
 import { PokemonCard } from "./PokemonCard.js";
+import { addProductToCart } from "./shoppingCart.js"
 
 export const pokemonCardCollection = [
     new PokemonCard("ex12-5", "Gengar", 25, 0, 5, new Date("2025-01-25")), 
@@ -33,7 +34,6 @@ const totalPages = Math.ceil(pokemonCardCollection.length / productsPerPage);
 
 document.addEventListener("DOMContentLoaded", () => {
     populateProducts();
-    loadCart();
 });
 
 const addToCartButton = document.getElementById("addToCartButton");
@@ -273,69 +273,6 @@ async function openProductModal(product) {
     document.getElementById("modalProductRarity").textContent = cardData.rarity || "Unknown Rarity";
 }
 
-function addCartItemToHTML(product) {
-    const cartList = document.getElementById("shoppingCartList");
-
-    const listItem = document.createElement("li");
-    listItem.setAttribute("data-id", product.id);
-    listItem.classList.add("cart-item");
-
-    const productImage = document.createElement("img");
-    productImage.src = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
-    productImage.alt = product.name;
-    productImage.classList.add("cart-item-image");
-
-    const textContainer = document.createElement("div");
-    textContainer.classList.add("cart-item-text");
-
-    const nameLabel = document.createElement("p");
-    nameLabel.innerHTML = product.name;
-    nameLabel.classList.add("cart-item-name");
-
-    const priceLabel = document.createElement("p");
-    priceLabel.innerHTML = `$${(product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))).toFixed(2)}`;
-    priceLabel.classList.add("cart-item-price");
-
-    const removeButton = document.createElement("button");
-    removeButton.innerHTML = "Remove from cart";
-    removeButton.type = "button";
-    removeButton.ariaLabel = "removeButton";
-    removeButton.classList.add("remove-button");
-    removeButton.addEventListener("click", () => removeProductFromCart(product.id, listItem));
-
-    const separator = document.createElement("hr");
-
-    textContainer.appendChild(nameLabel);
-    textContainer.appendChild(priceLabel);
-    textContainer.appendChild(removeButton);
-
-    listItem.appendChild(productImage);
-    listItem.appendChild(textContainer);
-
-    cartList.appendChild(listItem);
-    cartList.appendChild(separator);
-}
-
-function addProductToCart(id) {
-    const product = pokemonCardCollection.find(p => p.id === id);
-    if (product) {
-        cart.push(product);
-        saveCart();
-        addCartItemToHTML(product);
-        console.log("Added to cart:", product);
-    } else {
-        console.log("Product not found.");
-    }
-}
-
-function removeProductFromCart(productId, listItem) {
-    cart = cart.filter(p => p.id !== productId);
-    saveCart();
-    listItem.nextElementSibling?.remove();
-    listItem.remove();
-    console.log(`Removed product with ID ${productId}`);
-}
-
 async function getCardAsync(cardId)
 {
     try 
@@ -363,20 +300,4 @@ function sortByDateAdded(arrayTosort)
     let sortedProducts = [...arrayTosort]
     .sort((a, b) => b.dateAdded - a.dateAdded);
     return sortedProducts;
-}
-
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function loadCart() {
-    const storedCart = localStorage.getItem("cart");
-    cart = storedCart ? JSON.parse(storedCart) : [];
-
-    const cartList = document.getElementById("shoppingCartList");
-    cartList.innerHTML = ""; 
-
-    cart.forEach(product => {
-        addCartItemToHTML(product);
-    });
 }
