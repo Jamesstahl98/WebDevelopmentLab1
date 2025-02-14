@@ -17,3 +17,9 @@ p
 {
     font-family: 'Courier New', Courier, monospace;
 }
+#address-bar{
+    font-size: 22px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 10px;
+    position: absolute;
+}
