@@ -1,4 +1,8 @@
 /*Header*/
+.top-header{
+    background: rgb(128,207,133);
+    background: linear-gradient(180deg, rgba(128,207,133,1) 0%, rgba(255,255,255,1) 93%);
+}
 #header-container {
     opacity: 0;
     transition: opacity 0.5s ease-in;
@@ -7,6 +11,7 @@
 #header-container.loaded {
     opacity: 1;
 }
+
 .logo {
     font-weight: bold;
     font-size: 24px;
@@ -41,10 +46,12 @@
 * {
   border-radius: 0 !important;
 }
-body
-{
-    background-color: #fafafa;
+html, body {
+    background: rgb(202,202,202);
+    background: linear-gradient(0deg, rgba(202,202,202,1) 0%, rgba(255,255,255,1) 100%);
+    min-height: 100vh;
 }
+
 
 /*Shopping Cart*/
 .shoppingCartList hr {

@@ -1,0 +1,22 @@
+.page-item {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #000;
+}
+.page-item a {
+    color: #000;
+}
+
+.page-item a:hover {
+    color: #0056b3;
+}
+
+.page-link {
+    background-color: #6aa37b;
+}
+.page-link:hover {
+    background-color: #90b099;
+}
+
+.page-link:focus {
+    background-color: #afc9b7;
+}
