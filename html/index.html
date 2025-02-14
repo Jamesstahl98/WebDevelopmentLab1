@@ -18,6 +18,7 @@
     <title>Home Page</title>
 </head>
 <body>
+    <div id="header-container" style="height: 120px;"></div>
     <script type="module" src="../js/products.js"></script>
     <div id="header-container"></div>
     <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel">
@@ -44,21 +45,35 @@
         <section class="mb-5">
             <h2 class="fw-bold text-uppercase mb-3">On Sale</h2>
             <div class="row row-cols-1 row-cols-md-4 g-3" id="onSale">  
+                <div class="col product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-price"></div>
+                </div>
             </div>
         </section>
     </div>
-
+    
     <div class="container mt-4 products">
         <section class="mb-5">
-            <h2 class="fw-bold text-uppercase mb-3">New in stock</h5>
+            <h2 class="fw-bold text-uppercase mb-3">New in stock</h2>
             <div class="row row-cols-1 row-cols-md-4 g-3" id="newInStock">    
+                <div class="col product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-price"></div>
+                </div>
             </div>
         </section>
     </div>
     <script>
-    fetch("header.html")
+        fetch("header.html")
         .then(response => response.text())
-        .then(data => document.getElementById('header-container').innerHTML = data);
+        .then(data => {
+            const headerContainer = document.getElementById('header-container');
+            headerContainer.innerHTML = data;
+            headerContainer.classList.add('loaded');
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>

@@ -58,7 +58,6 @@ function populateProducts()
         setupPagination();
     }
 }
-
 async function populateProductDisplay(collection, elementId, amountToDisplay) {
     let productContainer = document.getElementById(elementId);
     productContainer.innerHTML = "";
@@ -71,23 +70,41 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
             link.rel = "preload";
             link.href = imageUrl;
             link.as = "image";
+            link.fetchpriority = "high"; 
             document.head.appendChild(link);
         }
     });
+
+    for (let i = 0; i < amountToDisplay; i++) {
+        let skeleton = document.createElement("div");
+        skeleton.classList.add("col", "skeleton-wrapper");
+        skeleton.innerHTML = `
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+                <div class="position-relative">
+                    <div class="skeleton-image"></div>
+                </div>
+                <div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-price"></div>
+                </div>
+            </div>
+        `;
+        productContainer.appendChild(skeleton);
+    }
 
     for (let i = 0; i < amountToDisplay && i < collection.length; i++) {
         let product = collection[i]; 
         let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
 
         let productElement = document.createElement("div");
-        productElement.classList.add("col");
+        productElement.classList.add("col", "product-wrapper");
         productElement.setAttribute("data-bs-toggle", "modal");
         productElement.setAttribute("data-bs-target", "#productModal");
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border">
-                <div class="position-relative">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+                <div class="position-relative" style="width: 80px; height: 100px;">
                     <!-- Sale Badge -->
                     ${product.percentOff > 0 ? `
                         <span class="badge bg-danger position-absolute top-0 start-0 translate-middle rounded-circle"
@@ -97,7 +114,8 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
                     
                     <!-- Product Image -->
                     <img src="${imageUrl}" fetchpriority="high" loading="eager"
-                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
+                         class="img-fluid rounded me-3 product-image" alt="${product.name}" 
+                         style="width: 80px; height: 100px; visibility: hidden;">
                 </div>
                 <div>
                     <p class="fw-bold mb-1">${product.name}</p>
@@ -107,7 +125,16 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
         `;
 
         productElement.addEventListener("click", () => openProductModal(product));
-        productContainer.appendChild(productElement);
+
+        let img = productElement.querySelector("img");
+        img.onload = () => {
+            img.style.visibility = "visible";
+            productContainer.children[i].replaceWith(productElement);
+        };
+        img.onerror = () => {
+            
+            productContainer.children[i].replaceWith(productElement);
+        };
     }
 }
 
@@ -119,52 +146,73 @@ function loadProductsWithPagination(page, collection) {
     const endIndex = startIndex + productsPerPage;
     const productsToDisplay = collection.slice(startIndex, endIndex);
 
-    productsToDisplay.forEach(product => {
+    productsToDisplay.forEach((product) => {
         let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
-
+        
         if (!document.querySelector(`link[rel="preload"][href="${imageUrl}"]`)) {
             let link = document.createElement("link");
             link.rel = "preload";
             link.href = imageUrl;
             link.as = "image";
+            link.fetchpriority = "high";
             document.head.appendChild(link);
         }
-    });
-
-    productsToDisplay.forEach((product, index) => {
-        let imageUrl = `https://images.pokemontcg.io/${product.id.replace("-", "/")}.png`;
 
         let productElement = document.createElement("div");
-        productElement.classList.add("col");
+        productElement.classList.add("col", "product-wrapper");
         productElement.setAttribute("data-bs-toggle", "modal");
         productElement.setAttribute("data-bs-target", "#productModal");
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border">
-                <div class="position-relative">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+                <div class="position-relative" style="width: 80px; height: 100px;">
                     <!-- Sale Badge -->
-                    ${product.percentOff > 0 ? `
+                    ${product.percentOff > 0 ? ` 
                         <span class="badge bg-danger position-absolute top-0 start-0 translate-middle rounded-circle"
                               style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 14px;">
                             -${product.percentOff}%
                         </span>` : ""}
                     
-                    <!-- Product Image -->
+                    <!-- Product Image (Initially hidden) -->
                     <img src="${imageUrl}" fetchpriority="high" loading="eager"
-                         class="img-fluid rounded me-3" alt="${product.name}" style="width: 80px; height: 100px;">
+                         class="img-fluid rounded me-3 product-image" alt="${product.name}" 
+                         style="width: 80px; height: 100px; visibility: hidden;">
                 </div>
                 <div>
-                    <p class="fw-bold mb-1">${product.name}</p>
-                    <p>$${product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))}</p>
+                    <p class="fw-bold mb-1 product-name skeleton-text">Loading...</p>
+                    <p class="product-price skeleton-text">...</p>
                 </div>
             </div>
         `;
 
         productElement.addEventListener("click", () => openProductModal(product));
+
         productsContainer.appendChild(productElement);
+
+        let img = productElement.querySelector("img");
+        let namePlaceholder = productElement.querySelector(".product-name");
+        let pricePlaceholder = productElement.querySelector(".product-price");
+
+        img.onload = () => {
+            img.style.visibility = "visible";
+            namePlaceholder.innerHTML = product.name;
+            pricePlaceholder.innerHTML = `$${(product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))).toFixed(2)}`;
+            
+            namePlaceholder.classList.remove("skeleton-text");
+            pricePlaceholder.classList.remove("skeleton-text");
+        };
+
+        img.onerror = () => {
+            namePlaceholder.innerHTML = product.name;
+            pricePlaceholder.innerHTML = `$${(product.originalPriceInDollars - (product.originalPriceInDollars * (product.percentOff / 100))).toFixed(2)}`;
+            
+            namePlaceholder.classList.remove("skeleton-text");
+            pricePlaceholder.classList.remove("skeleton-text");
+        };
     });
 }
+
 
 function setupPagination() {
     const pagination = document.querySelector(".pagination");
