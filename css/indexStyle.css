@@ -1,0 +1,12 @@
+#welcome-container {
+    text-align: center;
+}
+#welcome-container p {
+    font-family: 'Courier New', Courier, monospace;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#welcome-container h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
