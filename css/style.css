@@ -116,8 +116,8 @@ body
 .img-fluid {
     width: 80px;
     height: 100px;
-    object-fit: contain; /* Prevent stretching */
-    aspect-ratio: 4 / 5; /* Enforce consistent size */
+    object-fit: contain;
+    aspect-ratio: 4 / 5;
 }
 .badge {
     width: 40px !important;
