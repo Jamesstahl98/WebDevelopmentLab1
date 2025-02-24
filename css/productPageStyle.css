@@ -5,9 +5,12 @@
 .page-item a {
     color: #000;
 }
-
 .page-item a:hover {
-    color: #0056b3;
+    color: black;
+}
+
+.page-item a:focus {
+    color: black;
 }
 
 .page-link {

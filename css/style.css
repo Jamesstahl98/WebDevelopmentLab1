@@ -1,8 +1,17 @@
-/*Header*/
-.top-header{
-    background: rgb(128,207,133);
-    background: linear-gradient(180deg, rgba(128,207,133,1) 0%, rgba(255,255,255,1) 93%);
+* {
+    border-radius: 0 !important;
+  }
+  html, body {
+      color: #f3f3f3;
+      background-color: #555;
+      min-height: 100vh;
+  }
+a
+{
+    color: lightblue;
 }
+  
+/*Header*/
 #header-container {
     opacity: 0;
     transition: opacity 0.5s ease-in;
@@ -16,14 +25,6 @@
     font-weight: bold;
     font-size: 24px;
 }
-.purchase-button {
-    background-color: green;
-    width: 80%;
-    min-height: 40px;
-    position:absolute;
-    bottom: 0;
-    left: 10%;
-}
 .menu-icons {
     display: flex;
     align-items: center;
@@ -36,22 +37,17 @@
 }
 .logo-letter {
     font-size: 28px;
-    background-color: green;
-    color: yellow;
+    background-color: #a82121;
+    color: White;
     font-weight: bold;
     padding: 0px 12px;
     margin: 3px;
     display: inline-block;
 }
-* {
-  border-radius: 0 !important;
+.list-group-item
+{
+    background-color: #555;
 }
-html, body {
-    background: rgb(202,202,202);
-    background: linear-gradient(0deg, rgba(202,202,202,1) 0%, rgba(255,255,255,1) 100%);
-    min-height: 100vh;
-}
-
 
 /*Shopping Cart*/
 .shoppingCartList hr {
@@ -93,12 +89,12 @@ html, body {
 }
 
 .cart-item-price {
-    color: #555;
+    color: lightgrey;
     margin: 5px 0;
 }
 
 .remove-button {
-    background-color: #ed3124;
+    background-color: darkred;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -107,7 +103,21 @@ html, body {
 }
 
 .remove-button:hover {
-    background-color: darkred;
+    background-color: #590000;
+}
+
+.purchase-button {
+    background-color: green;
+    color: #f3f3f3;
+    width: 80%;
+    min-height: 40px;
+    position:absolute;
+    bottom: 0;
+    left: 10%;
+}
+.purchase-button:hover
+{
+    background-color: #003e05;
 }
 
 /*Modal*/
@@ -117,6 +127,9 @@ html, body {
 }
 .modal-body {
     padding-bottom: 60px; 
+}
+.btn-close {
+    filter: invert(1);
 }
 
 /*Product List*/

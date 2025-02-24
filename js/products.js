@@ -79,7 +79,7 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
         let skeleton = document.createElement("div");
         skeleton.classList.add("col", "skeleton-wrapper");
         skeleton.innerHTML = `
-            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-dark border product-card">
                 <div class="position-relative">
                     <div class="skeleton-image"></div>
                 </div>
@@ -103,7 +103,7 @@ async function populateProductDisplay(collection, elementId, amountToDisplay) {
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-dark border product-card">
                 <div class="position-relative" style="width: 80px; height: 100px;">
                     <!-- Sale Badge -->
                     ${product.percentOff > 0 ? `
@@ -165,7 +165,7 @@ function loadProductsWithPagination(page, collection) {
         productElement.style.cursor = "pointer";
 
         productElement.innerHTML = `
-            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-light border product-card">
+            <div class="d-flex align-items-center p-2 ps-0 ms-2 bg-dark border product-card">
                 <div class="position-relative" style="width: 80px; height: 100px;">
                     <!-- Sale Badge -->
                     ${product.percentOff > 0 ? ` 
