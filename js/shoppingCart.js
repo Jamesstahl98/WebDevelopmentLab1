@@ -40,6 +40,8 @@ export function addProductToCart(id) {
         saveCart();
         addCartItemToHTML(product);
         console.log("Added to cart:", product);
+
+        showPlusOneEffect();
     } else {
         console.log("Product not found.");
     }
@@ -90,4 +92,25 @@ function addCartItemToHTML(product) {
 
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function showPlusOneEffect() {
+    const cartButton = document.getElementById("shoppingCartButton");
+
+    if (!cartButton) return;
+
+    const plusOne = document.createElement("span");
+    plusOne.textContent = "+1";
+    plusOne.classList.add("plus-one");
+
+    const rect = cartButton.getBoundingClientRect();
+    plusOne.style.left = `${rect.left - rect.width}px`;
+    plusOne.style.top = `${rect.top + 10}px`;
+    plusOne.style.position = "fixed";
+
+    document.body.appendChild(plusOne);
+
+    setTimeout(() => {
+        plusOne.remove();
+    }, 1000);
 }
