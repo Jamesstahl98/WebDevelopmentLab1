@@ -3,6 +3,7 @@
   }
   html, body {
       color: #f3f3f3;
+      text-shadow: black 1px 0 10px;
       background-color: #555;
       min-height: 100vh;
   }
@@ -37,7 +38,7 @@ a
 }
 .logo-letter {
     font-size: 28px;
-    background-color: #a82121;
+    background-color: cadetblue;
     color: White;
     font-weight: bold;
     padding: 0px 12px;
