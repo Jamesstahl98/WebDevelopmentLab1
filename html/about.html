@@ -12,6 +12,7 @@
 <body>
     <div id="header-container" style="height: 120px;"></div>
     <script type="module" src="../js/products.js"></script>
+    <script src="../js/mapInteract.js"></script>
         
     <div class="d-flex justify-content-center mt-5">
         <h2>Who are we?</h2>
@@ -24,6 +25,7 @@
                 </div>
             </div>
         </div>
+        <!--Employees-->
         <div class="container-fluid mt-4">
             <div class="row g-3">
                 <div class="col-12 col-md-4">
@@ -97,14 +99,15 @@
                 </div>
             </div>
         </div>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="addressMap" aria-labelledby="addressMapLabel">
+        <!--Map-->
+        <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="addressMap" aria-labelledby="addressMapLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="addressMapLabel">Our Location</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d861.6396994144773!2d11.968715827805623!3d57.69525525932641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sse!4v1739538901912!5m2!1sen!2sse"
-                width="360" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div data-src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d861.6396994144773!2d11.968715827805623!3d57.69525525932641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sse!4v1739538901912!5m2!1sen!2sse"
+                id="map"></div>
             </div>
         </div>
         <i type="button" data-bs-toggle="offcanvas" data-bs-target="#addressMap"></itype><p class="bi bi-arrow-bar-right" id="address-bar">Karl Gustavsgatan 28</p></i>
